@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<title>登录</title>
+	<link rel="stylesheet" href="./component/pear/css/pear.css" />
+	<link rel="stylesheet" href="./admin/css/other/login.css" />
+	<link rel="stylesheet" href="./admin/css/variables.css" />
+	<script>if (window.self != window.top) { top.location.reload();}</script>
+</head>
+
+<body>
+	<div class="login-page" style="background-image: url(./admin/images/background.svg)">
+		<div class="layui-row">
+			<div class="layui-col-sm6 login-bg layui-hide-xs">
+				<img class="login-bg-img" src="./admin/images/banner.png" alt="" />
+			</div>
+			<div class="layui-col-sm6 layui-col-xs12 login-form">
+				<div class="layui-form">
+					<div class="form-center">
+						<div class="form-center-box">
+							<div class="top-log-title">
+								
+								<span>Pear Admin 4.0</span>
+							</div>
+							<div class="top-desc">
+								以 超 乎 想 象 的 速 度 构 建 内 部 工 具
+							</div>
+							<div style="margin-top: 30px;">
+								<div class="layui-form-item">
+									<div class="layui-input-wrap">
+										<div class="layui-input-prefix">
+											<i class="layui-icon layui-icon-username"></i>
+										</div>
+										<input lay-verify="required" placeholder="账户" autocomplete="off"
+											class="layui-input" id="sno">
+									</div>
+								</div>
+								<div class="layui-form-item">
+									<div class="layui-input-wrap">
+										<div class="layui-input-prefix">
+											<i class="layui-icon layui-icon-password"></i>
+										</div>
+										<input type="password" name="confirmPassword" value=""
+											lay-verify="required|confirmPassword" placeholder="密码" autocomplete="off"
+											class="layui-input" lay-affix="eye" id="password">
+									</div>
+								</div>
+
+
+								<div class="login-btn">
+									<button type="button" lay-submit lay-filter="login" class="layui-btn login">登 录</button>
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 资 源 引 入 -->
+	<script src="./component/layui/layui.js"></script>
+	<script src="./component/pear/pear.js"></script>
+	<script>
+		layui.use(['form', 'button', 'popup','toast'], function () {
+			var form = layui.form;
+			var button = layui.button;
+			var popup = layui.popup;
+            var toast = layui.toast;
+
+            const $=layui.$
+
+			// 登 录 提 交
+			form.on('submit(login)', function (data) {
+                let sno=$("#sno").val()
+                let password=$("#password").val()
+				/// 验证
+
+                $.ajax({
+                    url: '/api/student/validateUser',
+                    data: {
+                        sNo: sno,
+                        password: password
+                    }
+                }).done(result => {
+                    console.log(result);
+                    if(result.code == 0){
+                        location.href = "/index"
+                    }else{
+                        toast.error({
+                            message: result.msg,
+                        });
+                    }
+                });
+
+
+
+				/// 登录
+
+				// /// 动画
+				// button.load({
+				// 	elem: '.login',
+				// 	time: 1500,
+				// 	done: function () {
+				// 		popup.success("登录成功", function () {
+				// 			location.href = "./index.html"
+				// 		});
+				// 	}
+				// })
+
+				return false;
+			});
+		})
+	</script>
+</body>
+
+</html>

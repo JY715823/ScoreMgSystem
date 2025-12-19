@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/component/layui/css/layui.css">
+    <link rel="stylesheet" href="/css/datajpa02.css">
+
+</head>
+<body>
+
+<div class="container">
+    <div class="layui-row">
+        <div class="layui-col-xs12">
+            <h1 style="text-align: center">学生信息管理</h1>
+        </div>
+    </div>
+
+    <div class="layui-row">
+        <div class="layui-col-xs12 toolbar">
+
+
+            <div class="layui-row">
+                <button type="button" class="layui-btn layui-btn-sm layui-btn-normal"
+                        onclick="showStudentDlg();return false;">
+                    <i class="layui-icon layui-icon-addition"></i>
+                </button>
+
+                <button type="button" class="layui-btn layui-btn-sm layui-btn-normal layui-bg-red"
+                        onclick="deleteConfirm();" style="float:right;">
+                    <i class="layui-icon layui-icon-delete"></i>
+                </button>
+
+                <div class="queryBox">
+                    <form action="" class="layui-form" id="queryForm">
+                        <ul class="query-inline">
+                            <li class="layui-input-group">
+                                <div class="layui-input-prefix">
+                                    学号
+                                </div>
+                                <input type="text" placeholder="学号" class="layui-input" name="sno">
+                            </li>
+                            <li class="layui-input-group">
+                                <div class="layui-input-prefix">
+                                    姓名
+                                </div>
+                                <input type="text" placeholder="姓名" class="layui-input" name="name">
+                            </li>
+                            <li class="layui-input-group">
+                                <div class="layui-input-prefix">
+                                    年龄
+                                </div>
+                                <input type="number" placeholder="年龄" class="layui-input" name="age">
+                            </li>
+                            <li class="layui-input-group">
+                                <div class="layui-input-prefix">
+                                    分数
+                                </div>
+                                <input type="number" placeholder="分数" class="layui-input" name="score">
+                            </li>
+                            <li class="layui-input-group">
+                                <div class="layui-input-prefix">
+                                    性别
+                                </div>
+
+                                <select name="sex">
+                                    <option value="">请选择</option>
+                                    <option value="1">男</option>
+                                    <option value="2">女</option>
+                                </select>
+                            </li>
+                            <li class="layui-input-group">
+                                <button type="button" class="layui-btn layui-btn-normal" onclick="search();return false;"
+                                        style="margin-left: 20px;">查询
+                                </button>
+                            </li>
+                        </ul>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-row">
+        <div class="layui-col-xs12">
+           <table class="layui-hide" id="tbStudent" lay-filter="tbStudent"></table>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/html" id="editTemplate">
+    <div class="layui-clear-space">
+        <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    </div>
+</script>
+
+<form class="layui-form dlgcontainer" id="studForm" style="display: none;">
+    <div class="demo-reg-container">
+        <div class="layui-form-item" id="formid">
+            <div class="layui-row">
+                <div class="layui-col-xs12">
+                    <div class="layui-input-wrap">
+                        <div class="layui-input-prefix">
+                            <i class="layui-icon layui-icon-cellphone"></i>
+                        </div>
+                        <input type="text" name="id" value="" placeholder="id" lay-reqtext="id"
+                               autocomplete="off" class="layui-input" id="id">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-wrap">
+                <div class="layui-input-prefix">
+                    <i class="layui-icon layui-icon-vercode"></i>
+                </div>
+                <input type="text" name="sNo" value="" lay-verify="required" placeholder="学号"
+                       lay-reqtext="请填写学号" autocomplete="off" class="layui-input" id="sNo">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-wrap">
+                <div class="layui-input-prefix">
+                    <i class="layui-icon layui-icon-username"></i>
+                </div>
+                <input type="text" name="name" value="" lay-verify="required" placeholder="姓名"
+                       autocomplete="off" class="layui-input" id="name">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-wrap">
+                <label class="layui-form-label">性别</label>
+                <div class="layui-input-block">
+                    <input type="radio" name="sex" value="1" title="男" checked>
+                    <input type="radio" name="sex" value="2" title="女">
+                </div>
+
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-wrap">
+                <div class="layui-input-prefix">
+                    <i class="layui-icon layui-icon-moon"></i>
+                </div>
+                <input type="text" name="age" value="" placeholder="年龄" autocomplete="off" class="layui-input" lay-affix="clear">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-wrap">
+                <div class="layui-input-prefix">
+                    <i class="layui-icon layui-icon-moon"></i>
+                </div>
+                <input type="text" name="score" value="" placeholder="分数" autocomplete="off" class="layui-input" lay-affix="clear">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <button class="layui-btn layui-btn-fluid" lay-submit lay-filter="stud-dlg" id="btnOK">确定</button>
+        </div>
+    </div>
+
+</form>
+
+<script src="/component/layui/layui.js"></script>
+
+<script src="/pagejs/ajx01.js"></script>
+</body>
+</html>
