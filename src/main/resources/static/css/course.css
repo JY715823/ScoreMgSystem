@@ -1,0 +1,58 @@
+/* course.css - 课程管理样式 */
+
+/* 1. 背景图：书籍/图书馆主题 */
+body {
+    background: url('/admin/images/myimages/course.png') no-repeat center center fixed;
+    background-size: cover;
+    font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: rgba(255, 255, 255, 0.92); /* 稍微不透明一点，增强阅读性 */
+    border-radius: 15px;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(4px);
+}
+
+h1 {
+    font-weight: 300;
+    color: #2c3e50; /* 深蓝色标题 */
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+}
+
+.toolbar {
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #ddd;
+}
+
+.queryBox {
+    float: right;
+}
+
+.query-inline {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.query-inline li {
+    display: inline-block;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+/* 让输入框前缀和内容对齐 */
+.layui-input-group .layui-input-prefix {
+    line-height: 38px;
+}
+
+/* 弹出层圆角 */
+.layui-layer {
+    border-radius: 10px !important;
+}

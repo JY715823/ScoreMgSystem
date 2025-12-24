@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>课程管理</title>
+    <link rel="stylesheet" href="/component/layui/css/layui.css">
+    <link rel="stylesheet" href="/css/course.css">
+</head>
+<body>
+
+<div class="container">
+    <div class="layui-row">
+        <div class="layui-col-xs12">
+            <h1 style="text-align: center">
+                <i class="layui-icon layui-icon-read"></i> 课程信息管理
+            </h1>
+        </div>
+    </div>
+
+    <div class="layui-row">
+        <div class="layui-col-xs12 toolbar">
+            <div class="layui-row">
+                <button type="button" class="layui-btn layui-btn-sm layui-btn-normal"
+                        onclick="showCourseDlg();return false;">
+                    <i class="layui-icon layui-icon-addition"></i> 新增课程
+                </button>
+
+                <button type="button" class="layui-btn layui-btn-sm layui-btn-normal layui-bg-red"
+                        onclick="deleteConfirm();" style="float:right;">
+                    <i class="layui-icon layui-icon-delete"></i> 批量删除
+                </button>
+
+                <div class="queryBox">
+                    <form action="" class="layui-form" id="queryForm">
+                        <ul class="query-inline">
+                            <li class="layui-input-group">
+                                <div class="layui-input-prefix">课程名</div>
+                                <input type="text" placeholder="课程名称" class="layui-input" name="name">
+                            </li>
+                            <li class="layui-input-group">
+                                <div class="layui-input-prefix">老师</div>
+                                <input type="text" placeholder="任课老师" class="layui-input" name="teacher">
+                            </li>
+                            <li class="layui-input-group">
+                                <button type="button" class="layui-btn layui-btn-normal" onclick="search();return false;"
+                                        style="margin-left: 20px;">查询
+                                </button>
+                            </li>
+                        </ul>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-row">
+        <div class="layui-col-xs12">
+            <table class="layui-hide" id="tbCourse" lay-filter="tbCourse"></table>
+        </div>
+    </div>
+</div>
+
+<script type="text/html" id="editTemplate">
+    <div class="layui-clear-space">
+        <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+        <a class="layui-btn layui-btn-xs layui-bg-red" lay-event="del">删除</a>
+    </div>
+</script>
+
+<form class="layui-form dlgcontainer" id="courseForm" lay-filter="courseFormFilter" style="display: none; padding: 20px;">
+    <input type="hidden" name="id" id="id">
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">课程名称</label>
+        <div class="layui-input-block">
+            <input type="text" name="name" lay-verify="required" placeholder="请输入课程名称" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">任课老师</label>
+        <div class="layui-input-block">
+            <input type="text" name="teacher" lay-verify="required" placeholder="请输入老师姓名" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">学分</label>
+        <div class="layui-input-block">
+            <input type="number" name="credit" lay-verify="required|number" placeholder="请输入学分" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <button class="layui-btn layui-btn-fluid" lay-submit lay-filter="course-dlg" id="btnOK">确定</button>
+    </div>
+</form>
+
+<script src="/component/layui/layui.js"></script>
+<script src="/pagejs/course.js"></script>
+</body>
+</html>
