@@ -7,5 +7,4 @@ import java.util.List;
 
 public interface StudentReposity extends JpaRepository<Student,Long> {
     public List<Student> findBysNo(String sNo);
-
 }

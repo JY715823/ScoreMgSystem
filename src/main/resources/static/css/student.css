@@ -1,0 +1,61 @@
+/* student.css - 个人风格改进版 */
+
+/* 1. 网页整体背景 */
+body {
+    background: url('https://images.unsplash.com/photo-1497294815431-9365093b7331?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80') no-repeat center center fixed;
+    background-size: cover; /* 保证图片铺满屏幕 */
+    font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+}
+
+/* 2. 主体容器  */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 15px;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37); /* 漂亮的投影 */
+    backdrop-filter: blur(4px);
+}
+
+/* 3. 标题 */
+h1 {
+    font-weight: 300;
+    color: #333;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+}
+
+/* 4. 工具栏 */
+.toolbar {
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee; /* 加一条淡淡的分隔线 */
+}
+
+/* 5. 查询框样式 */
+.queryBox {
+    float: right;
+}
+
+.query-inline {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.query-inline li {
+    display: inline-block;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+.layui-input-group .layui-input-prefix {
+    line-height: 38px;
+}
+
+/* 让弹出层也稍微圆润一点（可选） */
+.layui-layer {
+    border-radius: 10px !important;
+}

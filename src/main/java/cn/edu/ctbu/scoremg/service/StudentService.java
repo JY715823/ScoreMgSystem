@@ -52,19 +52,40 @@ public class StudentService {
         studentReposity.deleteById(id);
     }
 
+    /**
+     * 批量删除学生
+     * @param ids ID列表
+     */
+    public void deleteBatch(List<Long> ids){
+        studentReposity.deleteAllById(ids);
+    }
 
+
+    // 【重点修改这个验证方法】
     public Student validateUsernameAndPassword(String sNo, String password) throws Exception {
+        // 1. 打印日志，看看前端传进来的到底是啥 (排除空格干扰)
+        System.out.println("正在验证登录 - 学号: [" + sNo + "], 密码: [" + password + "]");
+
+        // 2. 调用修改后的方法 findBySNo
         List<Student> students = studentReposity.findBysNo(sNo);
+
+        System.out.println("数据库查询结果数量: " + students.size());
+
         if (students.size() > 0) {
-            // 可能对password加密，但我们暂时不做处理
             Student student = students.get(0);
+
+            // 3. 打印数据库里的真实密码，看看是不是数据库里存的数据有问题
+            System.out.println("数据库中的密码: [" + student.getPassword() + "]");
+
             if (student.getPassword().equals(password)) {
-                // 成功
+                System.out.println("验证成功！");
                 return student;
             } else {
+                System.out.println("验证失败：密码不匹配");
                 throw new RException(REnum.LOGIN_ERR);
             }
         } else {
+            System.out.println("验证失败：未找到该学号的学生");
             throw new RException(REnum.LOGIN_ERR);
         }
     }

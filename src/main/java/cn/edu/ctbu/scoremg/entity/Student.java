@@ -12,19 +12,19 @@ import lombok.NoArgsConstructor;
 @Builder
 @Entity
 @Table(name="tb_student")
-
 public class Student {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-
     private Long id;
-    private String name;
-    private Short age;
-    @Column(name = "s_no")
-    private String sNo;
-    private Short sex;
-    private Short score;
-    // 密码
-    private String password;
 
+    @Column(name = "s_no")
+    private String sNo; // 学号
+
+    private String name; // 姓名
+
+    private Short age;   // 年龄
+
+    private Short sex;   // 1男 2女
+
+    private String password; // 密码
 }
