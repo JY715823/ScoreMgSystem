@@ -1,0 +1,83 @@
+/* login.css - 登录页面样式 */
+
+body, html {
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+    background-color: #f2f2f2;
+    font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
+}
+
+/* 左侧背景区 */
+.login-bg {
+    float: left;
+    width: 60%;
+    height: 100%;
+    background: url('/admin/images/myimages/login.jpg') no-repeat center center;
+    background-size: cover;
+    position: relative;
+}
+
+/* 给背景加个深色遮罩，显得文字更清楚 */
+.login-bg::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.welcome-text {
+    position: absolute;
+    top: 40%;
+    left: 10%;
+    color: #fff;
+}
+.welcome-text h1 {
+    font-size: 48px;
+    font-weight: 300;
+    margin-bottom: 20px;
+}
+.welcome-text p {
+    font-size: 18px;
+    opacity: 0.8;
+    letter-spacing: 1px;
+}
+
+/* 右侧登录表单区 */
+.login-box {
+    float: right;
+    width: 40%;
+    height: 100%;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-wrapper {
+    width: 360px;
+    padding: 40px;
+}
+
+.login-title {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 26px;
+    color: #333;
+    font-weight: 500;
+}
+
+/* 修复/自定义 Layui 样式 */
+.layui-form-item {
+    margin-bottom: 25px;
+}
+.layui-input {
+    height: 45px;
+    border-radius: 4px;
+}
+.layui-btn {
+    height: 45px;
+    border-radius: 4px;
+    font-size: 16px;
+    letter-spacing: 2px;
+}

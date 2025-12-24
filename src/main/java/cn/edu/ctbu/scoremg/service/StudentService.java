@@ -32,6 +32,10 @@ public class StudentService {
      * @return
      */
     public Student add(Student student){
+        // 设置默认密码 123456
+        if(student.getPassword() == null || student.getPassword().isEmpty()){
+            student.setPassword("123456");
+        }
         return studentReposity.save(student);
     }
 
@@ -61,31 +65,36 @@ public class StudentService {
     }
 
 
-    // 【重点修改这个验证方法】
     public Student validateUsernameAndPassword(String sNo, String password) throws Exception {
-        // 1. 打印日志，看看前端传进来的到底是啥 (排除空格干扰)
+
+        // 在验证方法的第一行加上这个：
+        System.out.println("========== 数据库环境自检 ==========");
+        List<Student> all = studentReposity.findAll();
+        for (Student s : all) {
+            System.out.println("学号:" + s.getSNo() + " | 密码:" + s.getPassword());
+        }
+        System.out.println("==================================");
         System.out.println("正在验证登录 - 学号: [" + sNo + "], 密码: [" + password + "]");
 
-        // 2. 调用修改后的方法 findBySNo
+        // 你说 findBysNo 能用，那就用它，只要能查出来就行
         List<Student> students = studentReposity.findBysNo(sNo);
-
-        System.out.println("数据库查询结果数量: " + students.size());
 
         if (students.size() > 0) {
             Student student = students.get(0);
-
-            // 3. 打印数据库里的真实密码，看看是不是数据库里存的数据有问题
             System.out.println("数据库中的密码: [" + student.getPassword() + "]");
 
+            // 【核心修复】防止 NPE：先判断数据库密码是否为 null
+            if (student.getPassword() == null) {
+                System.out.println("验证失败：该账号未设置密码");
+                throw new RException(REnum.LOGIN_ERR);
+            }
+
             if (student.getPassword().equals(password)) {
-                System.out.println("验证成功！");
                 return student;
             } else {
-                System.out.println("验证失败：密码不匹配");
                 throw new RException(REnum.LOGIN_ERR);
             }
         } else {
-            System.out.println("验证失败：未找到该学号的学生");
             throw new RException(REnum.LOGIN_ERR);
         }
     }
