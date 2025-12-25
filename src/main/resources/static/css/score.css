@@ -1,0 +1,45 @@
+body {
+    background-color: #f2f2f2;
+    padding: 10px;
+}
+
+.container {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,.1);
+}
+
+.toolbar {
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #f6f6f6;
+}
+
+.queryBox {
+    float: right;
+}
+
+.query-inline {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.query-inline li {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 10px;
+}
+
+/* 输入框前缀样式修正 */
+.layui-input-group > .layui-input-prefix {
+    line-height: 38px;
+    margin-right: 10px;
+    color: #666;
+}
+
+/* 弹窗样式 */
+.dlgcontainer {
+    padding: 20px 30px 0 0;
+}

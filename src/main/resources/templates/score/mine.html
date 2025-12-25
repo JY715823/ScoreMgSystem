@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>我的成绩</title>
+    <link rel="stylesheet" href="/component/layui/css/layui.css">
+    <link rel="stylesheet" href="/css/score.css">
+    <style>
+        /* 增加一些统计卡片的样式 */
+        .summary-card {
+            background: #fff;
+            border-radius: 4px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 1px 2px 0 rgba(0,0,0,.05);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+        .summary-item { text-align: center; }
+        .summary-num { font-size: 24px; font-weight: bold; color: #333; }
+        .summary-title { font-size: 14px; color: #888; margin-top: 5px; }
+        .pass-green { color: #5FB878; }
+        .fail-red { color: #FF5722; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="layui-row">
+        <div class="layui-col-xs12">
+            <div class="summary-card">
+                <div class="summary-item">
+                    <div class="summary-num" id="total-course">0</div>
+                    <div class="summary-title">考试门数</div>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-num" id="avg-score">0</div>
+                    <div class="summary-title">平均分</div>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-num" id="avg-gpa" style="color: #1E9FFF;">0.00</div>
+                    <div class="summary-title">平均绩点</div>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-num" id="max-score">0</div>
+                    <div class="summary-title">最高分</div>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-num" id="fail-count">0</div>
+                    <div class="summary-title">挂科数</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-row">
+        <div class="layui-col-xs12">
+            <div class="layui-card">
+                <div class="layui-card-header">详细成绩单</div>
+                <div class="layui-card-body">
+                    <table class="layui-hide" id="tbMine" lay-filter="tbMine"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/component/layui/layui.js"></script>
+<script src="/pagejs/mine.js"></script>
+</body>
+</html>

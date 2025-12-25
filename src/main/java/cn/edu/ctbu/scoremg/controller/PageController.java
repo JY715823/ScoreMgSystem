@@ -2,6 +2,7 @@ package cn.edu.ctbu.scoremg.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * 统一页面路由控制器
@@ -27,4 +28,25 @@ public class PageController {
     public String scoreList(){
         return "score/list";
     }
+
+    // 4.注册界面
+    @RequestMapping("/login")
+    public String Login(){
+        return "/login";
+    }
+
+    // 5.主页
+    @RequestMapping("/index")
+    public String index(){
+        return "/index";
+    }
+
+    // 6.学生端：我的成绩页面
+    @GetMapping("/score/mine")
+    public String scoreMine(){
+        return "score/mine";
+    }
+
+
+
 }

@@ -2,40 +2,48 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>首页</title>
+    <title>系统首页</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="../../component/pear/css/pear.css" />
     <link rel="stylesheet" href="../../admin/css/other/console.css" />
     <style>
-        /* 自定义样式：让界面更简洁大气 */
         .welcome-card {
-            background: linear-gradient(135deg, #1e9fff 0%, #40a9ff 100%);
+            background: linear-gradient(to right, #1E9FFF, #009688);
             color: #fff;
             padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(30, 159, 255, 0.2);
+            border-radius: 4px;
             margin-bottom: 15px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
-        .welcome-title { font-size: 26px; font-weight: 500; margin-bottom: 10px; }
-        .welcome-desc { font-size: 14px; opacity: 0.9; }
+        .welcome-title { font-size: 24px; font-weight: 500; margin-bottom: 10px; }
+        .welcome-date { font-size: 14px; opacity: 0.8; }
 
         .data-card {
             background: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            padding: 25px;
+            border-radius: 4px;
+            box-shadow: 0 1px 2px 0 rgba(0,0,0,.05);
             text-align: center;
             transition: all 0.3s;
         }
         .data-card:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-        .data-icon { font-size: 32px; margin-bottom: 10px; display: inline-block; }
-        .data-num { font-size: 28px; font-weight: bold; color: #333; }
-        .data-label { font-size: 14px; color: #888; margin-top: 5px; }
+        .data-num { font-size: 32px; font-weight: bold; color: #333; margin: 10px 0; }
+        .data-label { color: #888; font-size: 14px; }
+        .data-icon { font-size: 40px; margin-bottom: 10px; display: inline-block; }
 
-        /* 隐藏类，用于控制权限显示 */
-        .view-section { display: none; }
+        .notice-item {
+            padding: 15px 0;
+            border-bottom: 1px dashed #eee;
+            color: #666;
+            display: flex;
+            justify-content: space-between;
+        }
+        .notice-item:last-child { border-bottom: none; }
+        .notice-tag {
+            background: #f2f2f2; color: #888; padding: 2px 8px; border-radius: 2px; font-size: 12px; margin-right: 10px;
+        }
     </style>
 </head>
 <body class="pear-container">
@@ -43,72 +51,74 @@
 <div class="layui-row layui-col-space15">
     <div class="layui-col-md12">
         <div class="welcome-card">
-            <div class="welcome-title" id="welcomeMsg">欢迎回来，同学！</div>
-            <div class="welcome-desc">今天是 <span id="currentDate"></span>，新的一天，继续加油！</div>
+            <div class="welcome-title">欢迎回来，<span id="user-name">加载中...</span></div>
+            <div class="welcome-date" id="current-date">正在获取时间...</div>
         </div>
     </div>
 </div>
 
-<div id="admin-view" class="view-section">
-    <div class="layui-row layui-col-space15">
-        <div class="layui-col-md4">
-            <div class="data-card">
-                <i class="layui-icon layui-icon-user data-icon" style="color: #1e9fff;"></i>
-                <div class="data-num">1,203</div>
-                <div class="data-label">学生总数</div>
-            </div>
-        </div>
-        <div class="layui-col-md4">
-            <div class="data-card">
-                <i class="layui-icon layui-icon-read data-icon" style="color: #ffb800;"></i>
-                <div class="data-num">42</div>
-                <div class="data-label">课程总数</div>
-            </div>
-        </div>
-        <div class="layui-col-md4">
-            <div class="data-card">
-                <i class="layui-icon layui-icon-chart-screen data-icon" style="color: #ff5722;"></i>
-                <div class="data-num">78.5</div>
-                <div class="data-label">全校平均分</div>
-            </div>
+<div class="layui-row layui-col-space15">
+    <div class="layui-col-md4">
+        <div class="data-card">
+            <i class="layui-icon layui-icon-user data-icon" style="color: #1E9FFF;"></i>
+            <div class="data-num" id="stat-student">0</div>
+            <div class="data-label">学生总数 (人)</div>
         </div>
     </div>
-    <div class="layui-row layui-col-space15">
-        <div class="layui-col-md12">
-            <div class="layui-card">
-                <div class="layui-card-header">全校各科平均分分析</div>
-                <div class="layui-card-body">
-                    <div id="chart-admin-course" style="width: 100%; height: 400px;"></div>
-                </div>
-            </div>
+    <div class="layui-col-md4">
+        <div class="data-card">
+            <i class="layui-icon layui-icon-read data-icon" style="color: #FFB800;"></i>
+            <div class="data-num" id="stat-course">0</div>
+            <div class="data-label">课程总数 (门)</div>
+        </div>
+    </div>
+    <div class="layui-col-md4">
+        <div class="data-card">
+            <i class="layui-icon layui-icon-chart-screen data-icon" style="color: #FF5722;"></i>
+            <div class="data-num" id="stat-gpa">0.00</div>
+            <div class="data-label">全校平均绩点</div>
         </div>
     </div>
 </div>
 
-<div id="student-view" class="view-section">
-    <div class="layui-row layui-col-space15">
-        <div class="layui-col-md6">
-            <div class="data-card">
-                <i class="layui-icon layui-icon-star data-icon" style="color: #ffb800;"></i>
-                <div class="data-num">82.5</div>
-                <div class="data-label">我的平均分</div>
+<div class="layui-row layui-col-space15">
+    <div class="layui-col-md8">
+        <div class="layui-card">
+            <div class="layui-card-header">
+                <i class="layui-icon layui-icon-speaker"></i> 系统公告
             </div>
-        </div>
-        <div class="layui-col-md6">
-            <div class="data-card">
-                <i class="layui-icon layui-icon-trophy data-icon" style="color: #ff5722;"></i>
-                <div class="data-num">95</div>
-                <div class="data-label">我的最高分 (Java程序设计)</div>
+            <div class="layui-card-body">
+                <div class="notice-item">
+                    <div><span class="notice-tag">通知</span> 2024-2025学年第一学期期末成绩录入工作已开始</div>
+                    <span>12-25</span>
+                </div>
+                <div class="notice-item">
+                    <div><span class="notice-tag">维护</span> 系统将于本周六晚 23:00 进行例行维护</div>
+                    <span>12-24</span>
+                </div>
+                <div class="notice-item">
+                    <div><span class="notice-tag">考试</span> 关于补考申请流程的说明</div>
+                    <span>12-20</span>
+                </div>
+                <div class="notice-item">
+                    <div><span class="notice-tag">安全</span> 请各位同学和老师定期修改密码</div>
+                    <span>12-01</span>
+                </div>
             </div>
         </div>
     </div>
-    <div class="layui-row layui-col-space15">
-        <div class="layui-col-md12">
-            <div class="layui-card">
-                <div class="layui-card-header">我的成绩概览</div>
-                <div class="layui-card-body">
-                    <div id="chart-student-score" style="width: 100%; height: 400px;"></div>
-                </div>
+
+    <div class="layui-col-md4">
+        <div class="layui-card">
+            <div class="layui-card-header">使用说明</div>
+            <div class="layui-card-body" style="line-height: 24px; color: #666;">
+                <p><b>管理员：</b>请在“系统管理”中进行学生档案维护、课程设置及成绩录入。</p>
+                <hr style="margin: 10px 0;">
+                <p><b>学生：</b>请点击“我的成绩”查看个人分数及绩点分析。</p>
+                <br>
+                <blockquote class="layui-elem-quote" style="border-left: 5px solid #009688;">
+                    提示：绩点计算公式为 (分数-50)/10，不及格为0。
+                </blockquote>
             </div>
         </div>
     </div>
@@ -117,110 +127,36 @@
 <script src="../../component/layui/layui.js"></script>
 <script src="../../component/pear/pear.js"></script>
 <script>
-    layui.use(['layer', 'echarts', 'jquery'], function() {
+    layui.use(['jquery'], function() {
         var $ = layui.jquery;
-        var echarts = layui.echarts;
 
-        // ============================================
-        // 1. 设置日期和欢迎语
-        // ============================================
+        // 1. 设置当前日期
         var now = new Date();
-        $("#currentDate").text(now.getFullYear() + "年" + (now.getMonth() + 1) + "月" + now.getDate() + "日");
+        var dateStr = now.getFullYear() + "年" + (now.getMonth() + 1) + "月" + now.getDate() + "日";
+        $("#current-date").text("今天是 " + dateStr + "，祝您生活愉快！");
 
-        // ============================================
-        // 2. 模拟判断身份 (重点看这里！)
-        // ============================================
-        // ⚠️ 真实开发中，你需要请求后端 API: /api/login/info 获取当前用户身份
-        // 这里为了演示效果，我们默认设为 1 (管理员)。
-        // 你可以手动把这里改成 2 (学生) 来查看学生视图的效果。
+        // 2. 异步请求后端数据
+        $.ajax({
+            url: "/api/home/data",
+            method: "GET",
+            dataType: "json",
+            success: function(res) {
+                if(res.code === 0 && res.data) {
+                    var d = res.data;
 
-        var userType = 1; // <--- 🔴 改这里： 1=管理员, 2=学生
+                    // 填充用户名
+                    $("#user-name").text(d.username);
 
-        // 尝试从 localStorage 获取（如果你之前登录过）
-        // var cachedUserType = localStorage.getItem("userType");
-        // if(cachedUserType) userType = parseInt(cachedUserType);
-
-        if (userType === 1) {
-            $("#admin-view").show();
-            $("#welcomeMsg").text("欢迎回来，管理员！");
-            renderAdminCharts();
-        } else {
-            $("#student-view").show();
-            $("#welcomeMsg").text("欢迎回来，同学！");
-            renderStudentCharts();
-        }
-
-        // ============================================
-        // 3. 渲染图表 - 管理员
-        // ============================================
-        function renderAdminCharts() {
-            var myChart = echarts.init(document.getElementById('chart-admin-course'));
-            var option = {
-                tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
-                grid: { left: '3%', right: '4%', bottom: '3%', containLabel: true },
-                xAxis: {
-                    type: 'category',
-                    data: ['Java程序设计', '数据结构', '操作系统', '计算机网络', '数据库原理', '高等数学'],
-                    axisTick: { alignWithLabel: true }
-                },
-                yAxis: { type: 'value', name: '平均分' },
-                series: [{
-                    name: '平均分',
-                    type: 'bar',
-                    barWidth: '40%',
-                    data: [78, 85, 72, 80, 88, 65], // 模拟数据
-                    itemStyle: {
-                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                            { offset: 0, color: '#83bff6' },
-                            { offset: 0.5, color: '#188df0' },
-                            { offset: 1, color: '#188df0' }
-                        ])
-                    }
-                }]
-            };
-            myChart.setOption(option);
-            window.onresize = function() { myChart.resize(); }
-        }
-
-        // ============================================
-        // 4. 渲染图表 - 学生
-        // ============================================
-        function renderStudentCharts() {
-            var myChart = echarts.init(document.getElementById('chart-student-score'));
-            var option = {
-                title: { text: '' },
-                tooltip: { trigger: 'axis' },
-                legend: { data: ['我的成绩', '平均成绩'], bottom: 0 },
-                grid: { left: '3%', right: '4%', bottom: '10%', containLabel: true },
-                xAxis: {
-                    type: 'category',
-                    boundaryGap: false,
-                    data: ['Java程序设计', '数据结构', '操作系统', '计算机网络', '数据库原理', '高等数学']
-                },
-                yAxis: { type: 'value', max: 100 },
-                series: [
-                    {
-                        name: '我的成绩',
-                        type: 'line',
-                        data: [95, 88, 76, 85, 92, 70], // 模拟数据：我的成绩
-                        smooth: true,
-                        itemStyle: { color: '#ffb800' },
-                        areaStyle: { opacity: 0.2 }
-                    },
-                    {
-                        name: '平均成绩',
-                        type: 'line',
-                        data: [78, 85, 72, 80, 88, 65], // 模拟数据：平均成绩
-                        smooth: true,
-                        lineStyle: { type: 'dashed' },
-                        itemStyle: { color: '#888' }
-                    }
-                ]
-            };
-            myChart.setOption(option);
-            window.onresize = function() { myChart.resize(); }
-        }
-
+                    // 填充统计数据 (带简单的数字跳动效果可选，这里直接显示)
+                    $("#stat-student").text(d.studentCount);
+                    $("#stat-course").text(d.courseCount);
+                    $("#stat-gpa").text(d.schoolGpa);
+                }
+            },
+            error: function() {
+                $("#user-name").text("获取失败");
+            }
+        });
     });
 </script>
 </body>

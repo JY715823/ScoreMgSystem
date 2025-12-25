@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>成绩管理</title>
+    <link rel="stylesheet" href="/component/layui/css/layui.css">
+    <link rel="stylesheet" href="/css/score.css">
+</head>
+<body>
+
+<div class="container">
+    <div class="layui-row">
+        <div class="layui-col-xs12">
+            <h1 style="text-align: center">学生成绩管理</h1>
+        </div>
+    </div>
+
+    <div class="layui-row">
+        <div class="layui-col-xs12 toolbar">
+            <div class="layui-row">
+                <button type="button" class="layui-btn layui-btn-sm layui-btn-normal"
+                        onclick="showScoreDlg();return false;">
+                    <i class="layui-icon layui-icon-addition"></i> 录入成绩
+                </button>
+
+                <button type="button" class="layui-btn layui-btn-sm layui-btn-normal layui-bg-red"
+                        onclick="deleteConfirm();">
+                    <i class="layui-icon layui-icon-delete"></i> 批量删除
+                </button>
+
+                <div class="queryBox">
+                    <form action="" class="layui-form" id="queryForm">
+                        <ul class="query-inline">
+                            <li class="layui-input-group">
+                                <span style="margin-right: 5px;">关键字:</span>
+                                <div class="layui-inline">
+                                    <input type="text" placeholder="学生姓名 / 课程名称" class="layui-input" name="keyword">
+                                </div>
+                            </li>
+                            <li class="layui-input-group">
+                                <button type="button" class="layui-btn layui-btn-normal" onclick="search();return false;">
+                                    <i class="layui-icon layui-icon-search"></i> 查询
+                                </button>
+                            </li>
+                        </ul>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-row">
+        <div class="layui-col-xs12">
+            <table class="layui-hide" id="tbScore" lay-filter="tbScore"></table>
+        </div>
+    </div>
+</div>
+
+<script type="text/html" id="editTemplate">
+    <div class="layui-clear-space">
+        <a class="layui-btn layui-btn-xs" lay-event="edit">修改</a>
+        <a class="layui-btn layui-btn-xs layui-bg-red" lay-event="del">删除</a>
+    </div>
+</script>
+
+<form class="layui-form dlgcontainer" id="scoreForm" lay-filter="scoreFormFilter" style="display: none;">
+    <div class="demo-reg-container">
+        <input type="hidden" name="id" id="id">
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">学生ID</label>
+            <div class="layui-input-block">
+                <input type="text" name="student.id" lay-verify="required|number" placeholder="请输入学生ID"
+                       autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">课程ID</label>
+            <div class="layui-input-block">
+                <input type="text" name="course.id" lay-verify="required|number" placeholder="请输入课程ID"
+                       autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">分数</label>
+            <div class="layui-input-block">
+                <input type="number" name="score" lay-verify="required|number" placeholder="请输入0-100的分数"
+                       autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn layui-btn-fluid" lay-submit lay-filter="score-dlg" id="btnOK">保存</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script src="/component/layui/layui.js"></script>
+<script src="/pagejs/score.js"></script>
+</body>
+</html>
