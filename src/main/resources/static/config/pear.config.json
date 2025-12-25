@@ -1,27 +1,27 @@
 {
 	"logo": {
-		"title": "Pear Admin",
+		"title": "学生成绩管理系统",
 		"image": "admin/images/logo.png"
 	},
 	"menu": {
-		"data": "admin/data/menu.json",
+		"data": "api/menu",
 		"method": "GET",
 		"accordion": true,
 		"collapse": false,
 		"control": false,
 		"controlWidth": 500,
-		"select": "10",
+		"select": "100",
 		"async": true
 	},
 	"tab": {
-		"enable": false,
+		"enable": true,
 		"keepState": true,
 		"session": true,
 		"preload": false,
 		"max": "30",
 		"index": {
-			"id": "10",
-			"href": "view/console/console1.html",
+			"id": "home_root",
+			"href": "view/console/index.html",
 			"title": "首页"
 		}
 	},

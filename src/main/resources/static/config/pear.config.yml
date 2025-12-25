@@ -7,17 +7,17 @@ logo:
 ## 菜单配置
 menu: 
   ## 菜单数据
-  data: "admin/data/menu.json"
+  data: "api/menu"
   ## GET / POST
   method: "GET" 
   ## 菜单手风琴
-  accordion: true
+  accordion: false
   ## 默认折叠状态
   collapse: false
   ## 多菜单模式
   control: false
   ## 默认选中的菜单项
-  select: "10"
+  select: "root_home"
   ## 是否开启异步菜单，false 时 data 属性设置为静态数据，true 时为后端接口
   async: true
 ## 视图内容配置
@@ -34,8 +34,8 @@ tab:
   max: "30"
   ## 首页
   index: 
-    id: "10" ## 标识 ID , 建议与菜单项中的 ID 一致
-    href: "view/analysis/index.html" ## 页面地址
+    id: "root_home" ## 标识 ID , 建议与菜单项中的 ID 一致
+    href: "view/console/index.html" ## 页面地址
     title: "首页" ## 标题
 ## 主题配置
 theme: 
