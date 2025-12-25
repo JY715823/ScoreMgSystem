@@ -4,7 +4,7 @@ package cn.edu.ctbu.scoremg.service;
 import cn.edu.ctbu.scoremg.constant.REnum;
 import cn.edu.ctbu.scoremg.entity.Student;
 import cn.edu.ctbu.scoremg.exception.RException;
-import cn.edu.ctbu.scoremg.dao.StudentReposity;
+import cn.edu.ctbu.scoremg.dao.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
@@ -16,14 +16,14 @@ import java.util.List;
 @Service
 public class StudentService {
     @Autowired
-    private StudentReposity studentReposity;
+    private StudentRepository studentRepository;
 
     public List<Student> findAll(){
-        return studentReposity.findAll();
+        return studentRepository.findAll();
     }
 
     public Student findById(Long id){
-        return studentReposity.findById(id).get();
+        return studentRepository.findById(id).get();
     }
 
     /**
@@ -36,7 +36,7 @@ public class StudentService {
         if(student.getPassword() == null || student.getPassword().isEmpty()){
             student.setPassword("123456");
         }
-        return studentReposity.save(student);
+        return studentRepository.save(student);
     }
 
     /**
@@ -45,7 +45,7 @@ public class StudentService {
      * @return
      */
     public Student update(Student student){
-        return studentReposity.save(student);
+        return studentRepository.save(student);
     }
 
     /**
@@ -53,7 +53,7 @@ public class StudentService {
      * @param id
      */
     public void delete(Long id){
-        studentReposity.deleteById(id);
+        studentRepository.deleteById(id);
     }
 
     /**
@@ -61,7 +61,7 @@ public class StudentService {
      * @param ids ID列表
      */
     public void deleteBatch(List<Long> ids){
-        studentReposity.deleteAllById(ids);
+        studentRepository.deleteAllById(ids);
     }
 
 
@@ -69,7 +69,7 @@ public class StudentService {
 
         // 在验证方法的第一行加上这个：
         System.out.println("========== 数据库环境自检 ==========");
-        List<Student> all = studentReposity.findAll();
+        List<Student> all = studentRepository.findAll();
         for (Student s : all) {
             System.out.println("学号:" + s.getSNo() + " | 密码:" + s.getPassword());
         }
@@ -77,7 +77,7 @@ public class StudentService {
         System.out.println("正在验证登录 - 学号: [" + sNo + "], 密码: [" + password + "]");
 
         // 你说 findBysNo 能用，那就用它，只要能查出来就行
-        List<Student> students = studentReposity.findBysNo(sNo);
+        List<Student> students = studentRepository.findBysNo(sNo);
 
         if (students.size() > 0) {
             Student student = students.get(0);
@@ -100,10 +100,10 @@ public class StudentService {
     }
 
     public Page<Student> getAll(Pageable pageable) {
-        return studentReposity.findAll(pageable);
+        return studentRepository.findAll(pageable);
     }
 
     public Page<Student> getAll(Example<Student> example, Pageable pageable) {
-        return studentReposity.findAll(example, pageable);
+        return studentRepository.findAll(example, pageable);
     }
 }
