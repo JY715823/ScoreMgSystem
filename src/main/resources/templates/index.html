@@ -32,8 +32,6 @@
 				<div id="control" class="layui-layout-control"></div>
 				<!-- 顶 部 右 侧 菜 单 -->
 				<ul class="layui-nav layui-layout-right">
-					<li class="layui-nav-item layui-hide-xs"><a href="#" class="menuSearch layui-icon layui-icon-search"></a></li>
-					<li class="layui-nav-item layui-hide-xs message"></li>
 					<li class="layui-nav-item layui-hide-xs"><a href="#" class="fullScreen layui-icon layui-icon-screen-full"></a></li>
 					<li class="layui-nav-item user">
 						<!-- 头 像 -->
@@ -44,8 +42,6 @@
 							<dd><a href="javascript:void(0);" class="logout">注销登录</a></dd>
 						</dl>
 					</li>
-					<!-- 主 题 配 置 -->
-					<li class="layui-nav-item setting"><a href="#" class="layui-icon layui-icon-more-vertical"></a></li>
 				</ul>
 			</div>
 			<!-- 侧 边 区 域 -->
@@ -99,14 +95,17 @@
 
 				// 注销
 				admin.logout(function(){
-
-					popup.success("注销成功",function(){
-						location.href = "./login.html";
-					})
-
-					// 清空 tabs 缓存
 					return new Promise((resolve) => {
-						resolve(true)
+						$.ajax({
+							url: "/api/login/logout",
+							type: "POST",
+							complete: function() {
+								popup.success("注销成功", function(){
+									location.href = "./login.html";
+								});
+								resolve(true);
+							}
+						});
 					});
 				});
 			})

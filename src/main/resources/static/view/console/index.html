@@ -33,16 +33,60 @@
         .data-label { color: #888; font-size: 14px; }
         .data-icon { font-size: 40px; margin-bottom: 10px; display: inline-block; }
 
-        .notice-item {
-            padding: 15px 0;
-            border-bottom: 1px dashed #eee;
-            color: #666;
-            display: flex;
-            justify-content: space-between;
+        .guide-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-gap: 14px;
         }
-        .notice-item:last-child { border-bottom: none; }
-        .notice-tag {
-            background: #f2f2f2; color: #888; padding: 2px 8px; border-radius: 2px; font-size: 12px; margin-right: 10px;
+        .guide-item {
+            background: #fafafa;
+            border: 1px solid #f0f0f0;
+            padding: 14px;
+            border-radius: 6px;
+            display: flex;
+            align-items: flex-start;
+        }
+        .guide-item i {
+            font-size: 22px;
+            color: #009688;
+            margin-right: 12px;
+            margin-top: 3px;
+        }
+        .guide-title {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 4px;
+        }
+        .guide-desc {
+            color: #666;
+            line-height: 22px;
+        }
+        .quick-link-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .quick-link {
+            padding: 12px 14px;
+            border-radius: 6px;
+            border: 1px solid #f0f0f0;
+            background: linear-gradient(135deg, #f8f9ff, #f3fffb);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all .2s;
+        }
+        .quick-link:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+            transform: translateY(-2px);
+        }
+        .quick-link .label {
+            font-weight: 600;
+            color: #333;
+        }
+        .quick-link .desc {
+            color: #888;
+            font-size: 13px;
         }
     </style>
 </head>
@@ -85,50 +129,37 @@
     <div class="layui-col-md8">
         <div class="layui-card">
             <div class="layui-card-header">
-                <i class="layui-icon layui-icon-speaker"></i> 系统公告
+                <i class="layui-icon layui-icon-template-1"></i> 使用说明
             </div>
             <div class="layui-card-body">
-                <div class="notice-item">
-                    <div><span class="notice-tag">通知</span> 2024-2025学年第一学期期末成绩录入工作已开始</div>
-                    <span>12-25</span>
-                </div>
-                <div class="notice-item">
-                    <div><span class="notice-tag">维护</span> 系统将于本周六晚 23:00 进行例行维护</div>
-                    <span>12-24</span>
-                </div>
-                <div class="notice-item">
-                    <div><span class="notice-tag">考试</span> 关于补考申请流程的说明</div>
-                    <span>12-20</span>
-                </div>
-                <div class="notice-item">
-                    <div><span class="notice-tag">安全</span> 请各位同学和老师定期修改密码</div>
-                    <span>12-01</span>
+                <div class="guide-list">
+                    <div class="guide-item">
+                        <i class="layui-icon layui-icon-set"></i>
+                        <div>
+                            <div class="guide-title">管理员使用</div>
+                            <div class="guide-desc">在“学生管理”维护基础档案，在“课程管理”新增或调整课程，在“成绩管理”完成成绩录入与审核。</div>
+                        </div>
+                    </div>
+                    <div class="guide-item">
+                        <i class="layui-icon layui-icon-user"></i>
+                        <div>
+                            <div class="guide-title">学生端</div>
+                            <div class="guide-desc">在“我的成绩”查看个人分数及绩点分析，点击单科可查看详细评语。默认绩点计算公式：(分数-50)/10，不及格为0。</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="layui-col-md4">
-        <div class="layui-card">
-            <div class="layui-card-header">使用说明</div>
-            <div class="layui-card-body" style="line-height: 24px; color: #666;">
-                <p><b>管理员：</b>请在“系统管理”中进行学生档案维护、课程设置及成绩录入。</p>
-                <hr style="margin: 10px 0;">
-                <p><b>学生：</b>请点击“我的成绩”查看个人分数及绩点分析。</p>
-                <br>
-                <blockquote class="layui-elem-quote" style="border-left: 5px solid #009688;">
-                    提示：绩点计算公式为 (分数-50)/10，不及格为0。
-                </blockquote>
-            </div>
-        </div>
-    </div>
 </div>
 
 <script src="../../component/layui/layui.js"></script>
 <script src="../../component/pear/pear.js"></script>
 <script>
-    layui.use(['jquery'], function() {
+    layui.use(['jquery','layer'], function() {
         var $ = layui.jquery;
+        var layer = layui.layer;
 
         // 1. 设置当前日期
         var now = new Date();
