@@ -1,207 +1,163 @@
-<link rel="stylesheet" href="../../admin/css/other/profile.css" />
-
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>个人资料</title>
+    <link rel="stylesheet" href="../../component/pear/css/pear.css" />
+    <style>
+        .profile-card { padding: 24px; }
+        .profile-title { font-size: 18px; font-weight: 600; margin-bottom: 12px; }
+        .profile-sub { color: #888; margin-bottom: 18px; }
+        .readonly-tip { padding: 12px; background: #f7f7f7; border: 1px solid #eee; border-radius: 4px; color: #666; }
+    </style>
+</head>
 <body>
-    <div class="pear-container">
-        <div class="layui-row layui-col-space10">
-            <div class="layui-col-md3">
-                <div class="layui-card">
-                    <div class="layui-card-body" style="padding: 25px;">
-                        <div class="text-center layui-text">
-                            <div class="user-info" id="userInfoHead">
-                                <img src="../../admin/images/avatar.jpg" id="userAvatar" width="115px" height="115px"
-                                    alt="">
-                            </div>
-                            <h2 class="user-name">就眠仪式</h2>
-                            <p class="user-home">China ， 中国</p>
-                        </div>
-                    </div>
-                    <div
-                        class="user-desc">
-                        <span>今日事 ，今日毕</span>
-                    </div>
-                </div>
+<div class="pear-container">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md6 layui-col-md-offset3">
+            <div class="layui-card">
+                <div class="layui-card-header">基本资料</div>
+                <div class="layui-card-body profile-card">
+                    <div class="profile-title">账户信息</div>
+                    <div class="profile-sub">修改姓名、性别、年龄及密码（学号不可修改）。</div>
 
-                <div class="layui-card">
-					<div class="layui-card-header">留言板</div>
-					<div class="layui-card-body">
-						<ul class="message-board">
-							<li>
-								<p>快乐的时候不敢尽兴，频繁警戒自己保持清醒。</p>
-								<span>4月30日 22:43</span>
-								<a href="javascript:;" data-id="1"
-									class="layui-btn layui-btn-primary layui-btn-xs message-board-reply">回复</a>
-							</li>
-							<li>
-								<p>夏天真的来了，尽管它还有些犹豫。</p>
-								<span>4月30日 22:43</span>
-								<a href="javascript:;" data-id="1"
-									class="layui-btn layui-btn-primary layui-btn-xs message-board-reply">回复</a>
-							</li>
-                            <li>
-								<p>要不要作为我的家人，搬来我家。</p>
-								<span>12月25日 19:92</span>
-								<a href="javascript:;" data-id="1"
-									class="layui-btn layui-btn-primary layui-btn-xs message-board-reply">回复</a>
-							</li>
-							<li>
-								<p>接近，是我对一切的态度，是我对一切态度的距离</p>
-								<span>6月11日 15:33</span>
-								<a href="javascript:;" data-id="1"
-									class="layui-btn layui-btn-primary layui-btn-xs message-board-reply">回复</a>
-							</li>
-							<li>
-								<p>没有锚的船当然也可以航行，只是紧张充满你的一生。</p>
-								<span>2月09日 13:40</span>
-								<a href="javascript:;" data-id="1"
-									class="layui-btn layui-btn-primary layui-btn-xs message-board-reply">回复</a>
-							</li>
-						</ul>
-					</div>
-				</div>
-            </div>
-            <div class="layui-col-md9">
-                <div class="layui-card">
-                    <div class="layui-card-header">
-                        我的文章
-                    </div>
-                    <div class="layui-card-body">
-                        <div class="layui-row layui-col-space10" style="margin: 15px;">
-                            <div class="layui-col-md1">
-                                <img src="../../admin/images/blog.jpg"
-                                    style="width: 100%;height: 100%;border-radius: 5px;" />
-                            </div>
-                            <div class="layui-col-md11" style="height: 80px;">
-                                <div class="blog-title">为什么程序员们愿意在GitHub上开源自己的成果给别人免费使用和学习？</div>
-                                <div class="blog-content">
-                                    “Git的精髓在于让所有人的贡献无缝合并。而GitHub的天才之处，在于理解了Git的精髓。”来一句我们程序员们接地气的话：分享是一种快乐~
-                                </div>
+                    <form class="layui-form" lay-filter="profileForm">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">学号</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="sNo" readonly class="layui-input layui-bg-gray">
                             </div>
                         </div>
-                        <div class="layui-row layui-col-space10" style="margin: 15px;">
-                            <div class="layui-col-md1">
-                                <img src="../../admin/images/blog.jpg"
-                                    style="width: 100%;height: 100%;border-radius: 5px;" />
-                            </div>
-                            <div class="layui-col-md11" style="height: 80px;">
-                                <div class="blog-title">为什么程序员们愿意在GitHub上开源自己的成果给别人免费使用和学习？</div>
-                                <div class="blog-content">
-                                    “Git的精髓在于让所有人的贡献无缝合并。而GitHub的天才之处，在于理解了Git的精髓。”来一句我们程序员们接地气的话：分享是一种快乐~
-                                </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">姓名</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="name" required lay-verify="required" placeholder="请输入姓名" autocomplete="off" class="layui-input">
                             </div>
                         </div>
-                        <div class="layui-row layui-col-space10" style="margin: 15px;">
-                            <div class="layui-col-md1">
-                                <img src="../../admin/images/blog.jpg"
-                                    style="width: 100%;height: 100%;border-radius: 5px;" />
-                            </div>
-                            <div class="layui-col-md11" style="height: 80px;">
-                                <div class="blog-title">为什么程序员们愿意在GitHub上开源自己的成果给别人免费使用和学习？</div>
-                                <div class="blog-content">
-                                    “Git的精髓在于让所有人的贡献无缝合并。而GitHub的天才之处，在于理解了Git的精髓。”来一句我们程序员们接地气的话：分享是一种快乐~
-                                </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">性别</label>
+                            <div class="layui-input-block">
+                                <select name="sex">
+                                    <option value="1">男</option>
+                                    <option value="2">女</option>
+                                </select>
                             </div>
                         </div>
-                        <div class="layui-row layui-col-space10" style="margin: 15px;">
-                            <div class="layui-col-md1">
-                                <img src="../../admin/images/blog.jpg"
-                                    style="width: 100%;height: 100%;border-radius: 5px;" />
-                            </div>
-                            <div class="layui-col-md11" style="height: 80px;">
-                                <div class="blog-title">为什么程序员们愿意在GitHub上开源自己的成果给别人免费使用和学习？</div>
-                                <div class="blog-content">
-                                    “Git的精髓在于让所有人的贡献无缝合并。而GitHub的天才之处，在于理解了Git的精髓。”来一句我们程序员们接地气的话：分享是一种快乐~
-                                </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">年龄</label>
+                            <div class="layui-input-block">
+                                <input type="number" name="age" min="0" placeholder="请输入年龄" class="layui-input">
                             </div>
                         </div>
-                        <div class="layui-row layui-col-space10" style="margin: 15px;">
-                            <div class="layui-col-md1">
-                                <img src="../../admin/images/blog.jpg"
-                                    style="width: 100%;height: 100%;border-radius: 5px;" />
-                            </div>
-                            <div class="layui-col-md11" style="height: 80px;">
-                                <div class="blog-title">为什么程序员们愿意在GitHub上开源自己的成果给别人免费使用和学习？</div>
-                                <div class="blog-content">
-                                    “Git的精髓在于让所有人的贡献无缝合并。而GitHub的天才之处，在于理解了Git的精髓。”来一句我们程序员们接地气的话：分享是一种快乐~
-                                </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">新密码</label>
+                            <div class="layui-input-block">
+                                <input type="password" name="password" placeholder="不修改请留空" autocomplete="off" class="layui-input">
                             </div>
                         </div>
-                        <div class="layui-row layui-col-space10" style="margin: 15px;">
-                            <div class="layui-col-md1">
-                                <img src="../../admin/images/blog.jpg"
-                                    style="width: 100%;height: 100%;border-radius: 5px;" />
-                            </div>
-                            <div class="layui-col-md11" style="height: 80px;">
-                                <div class="blog-title">为什么程序员们愿意在GitHub上开源自己的成果给别人免费使用和学习？</div>
-                                <div class="blog-content">
-                                    “Git的精髓在于让所有人的贡献无缝合并。而GitHub的天才之处，在于理解了Git的精髓。”来一句我们程序员们接地气的话：分享是一种快乐~
-                                </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">确认密码</label>
+                            <div class="layui-input-block">
+                                <input type="password" name="passwordConfirm" lay-verify="confirmPwd" placeholder="请再次输入新密码" autocomplete="off" class="layui-input">
                             </div>
                         </div>
-                        <div class="layui-row layui-col-space10" style="margin: 15px;">
-                            <div class="layui-col-md1">
-                                <img src="../../admin/images/blog.jpg"
-                                    style="width: 100%;height: 100%;border-radius: 5px;" />
-                            </div>
-                            <div class="layui-col-md11" style="height: 80px;">
-                                <div class="blog-title">为什么程序员们愿意在GitHub上开源自己的成果给别人免费使用和学习？</div>
-                                <div class="blog-content">
-                                    “Git的精髓在于让所有人的贡献无缝合并。而GitHub的天才之处，在于理解了Git的精髓。”来一句我们程序员们接地气的话：分享是一种快乐~
-                                </div>
+                        <div class="layui-form-item layui-hide" id="adminTips">
+                            <div class="layui-input-block">
+                                <div class="readonly-tip">当前为管理员账户，无法在此页面修改信息。</div>
                             </div>
                         </div>
-                        <div class="layui-row layui-col-space10" style="margin: 15px;">
-                            <div class="layui-col-md1">
-                                <img src="../../admin/images/blog.jpg"
-                                    style="width: 100%;height: 100%;border-radius: 5px;" />
-                            </div>
-                            <div class="layui-col-md11" style="height: 80px;">
-                                <div class="blog-title">为什么程序员们愿意在GitHub上开源自己的成果给别人免费使用和学习？</div>
-                                <div class="blog-content">
-                                    “Git的精髓在于让所有人的贡献无缝合并。而GitHub的天才之处，在于理解了Git的精髓。”来一句我们程序员们接地气的话：分享是一种快乐~
-                                </div>
+                        <div class="layui-form-item">
+                            <div class="layui-input-block">
+                                <button class="layui-btn" lay-submit lay-filter="profileSubmit">保存修改</button>
                             </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-    <script>
-        layui.use(['jquery', 'element', 'layer', 'tools'], function () {
-            var element = layui.element,
-                layer = layui.layer,
-                $ = layui.jquery,
-                tools = layui.tools;
+<script src="../../component/layui/layui.js"></script>
+<script src="../../component/pear/pear.js"></script>
+<script>
+    layui.use(['form','layer','jquery'], function(){
+        var form = layui.form;
+        var layer = layui.layer;
+        var $ = layui.jquery;
+        var userType = "guest";
 
-            let MODULE_PATH = "operate/";
+        function loadProfile() {
+            $.get('/api/profile/me', function(res){
+                if(res.code === 0 && res.data){
+                    userType = res.data.userType;
+                    form.val('profileForm', {
+                        'sNo': res.data.sNo || '管理员',
+                        'name': res.data.name || '',
+                        'sex': res.data.sex || '1',
+                        'age': res.data.age || ''
+                    });
 
-            var image = new Image();
-            image.src = "../../admin/images/avatar.jpg";
-            image.onload = function () {
-                $("#userAvatar").attr("src", tools.imageToBase64(image));
-            }
-
-            window.callback = function (data) {
-                layer.close(data.index);
-                $("#userAvatar").attr("src", data.newAvatar);
-            }
-
-            $("#userAvatar").click(function () {
-                layer.open({
-                    type: 2,
-                    title: '更换图片',
-                    shade: 0.1,
-                    area: ["900px", "500px"],
-                    content: MODULE_PATH + 'profile.html',
-                    btn: ['确定', '取消'],
-                    yes: function (index, layero) {
-                        window['layui-layer-iframe' + index].submitForm();
+                    if(userType === 'admin'){
+                        $('#adminTips').removeClass('layui-hide');
+                        $('.layui-form button[lay-filter="profileSubmit"]').addClass('layui-btn-disabled').attr('disabled', true);
+                        $('input, select').attr('disabled', true);
+                        form.render();
                     }
-                });
+                }else{
+                    layer.msg(res.msg || '获取资料失败');
+                }
             });
-        });
-    </script>
-</body>
+        }
 
+        form.verify({
+            confirmPwd: function(value){
+                var pwd = $('input[name="password"]').val();
+                if(pwd && value !== pwd){
+                    return '两次输入的密码不一致';
+                }
+            }
+        });
+
+        form.on('submit(profileSubmit)', function(data){
+            if(userType !== 'student'){
+                layer.msg('当前账户无法修改资料');
+                return false;
+            }
+            if(data.field.password !== data.field.passwordConfirm){
+                layer.msg('两次输入的密码不一致');
+                return false;
+            }
+
+            var payload = {
+                name: data.field.name,
+                sex: data.field.sex,
+                age: data.field.age,
+                password: data.field.password
+            };
+
+            $.ajax({
+                url: '/api/profile/update',
+                method: 'PUT',
+                data: JSON.stringify(payload),
+                contentType: 'application/json',
+                success: function(res){
+                    if(res.code === 0){
+                        layer.msg('保存成功');
+                        $('input[name="password"], input[name="passwordConfirm"]').val('');
+                    }else{
+                        layer.msg(res.msg || '保存失败');
+                    }
+                },
+                error: function(){
+                    layer.msg('服务器繁忙，请稍后再试');
+                }
+            });
+            return false;
+        });
+
+        loadProfile();
+    });
+</script>
+</body>
 </html>
