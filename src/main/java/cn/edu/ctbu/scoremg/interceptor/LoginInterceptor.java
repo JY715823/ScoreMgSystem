@@ -1,6 +1,5 @@
 package cn.edu.ctbu.scoremg.interceptor;
 
-import cn.edu.ctbu.scoremg.entity.Student;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -12,7 +11,7 @@ public class LoginInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         // 登录校验逻辑
         Object userInfo = request.getSession().getAttribute("userInfo");
-        if (userInfo != null && userInfo instanceof Student) {
+        if (userInfo != null) {
             return true; // 继续执行后续的拦截器或控制器
         }
         response.sendRedirect("/login"); // 401 未授权
