@@ -76,7 +76,6 @@ public class StudentService {
         System.out.println("==================================");
         System.out.println("正在验证登录 - 学号: [" + sNo + "], 密码: [" + password + "]");
 
-        // 你说 findBysNo 能用，那就用它，只要能查出来就行
         List<Student> students = studentRepository.findBysNo(sNo);
 
         if (students.size() > 0) {

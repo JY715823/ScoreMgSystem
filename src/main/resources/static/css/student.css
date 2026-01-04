@@ -1,4 +1,3 @@
-/* student.css - 个人风格改进版 */
 
 /* 1. 网页整体背景 */
 body {
@@ -55,7 +54,6 @@ h1 {
     line-height: 38px;
 }
 
-/* 让弹出层也稍微圆润一点（可选） */
 .layui-layer {
     border-radius: 10px !important;
 }

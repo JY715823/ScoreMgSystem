@@ -13,15 +13,7 @@ function showScoreDlg(id) {
 
     if (id) {
         title = "修改成绩";
-        // 获取详情回显
-        // 注意：如果你点击编辑，我们需要把 student.id 和 course.id 回填
-        // 这需要后端 API 返回的数据结构里包含嵌套对象
         $.ajax({
-            // 这里我们暂时没有写单个查询接口 /api/score/{id}，
-            // 实际上 Layui table 的行数据里已经有了，我们可以直接从行数据取
-            // 但为了规范，还是建议走接口，或者直接用 table 的数据回显(更简单)
-            // 鉴于之前没写 findById，我们这里暂时用一种简单方式：如果 id 存在，说明是编辑，
-            // 实际操作中，table工具条点击时已经拿到了 row data
         });
     }
 
